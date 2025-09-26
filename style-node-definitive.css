@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Definitive Node Layout - Exactly 3 Lines
+   ========================================================================== */
+
+/* Remove all previous node styling conflicts */
+.node-inner-grid>* {
+    display: block !important;
+}
+
+/* Grid container */
+.node-inner-grid {
+    display: block !important;
+    padding: 0.75rem !important;
+}
+
+/* LINE 1: Name, Description, Delete button */
+.node-line-1 {
+    display: flex !important;
+    gap: 0.5rem !important;
+    align-items: flex-end !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+}
+
+.node-line-1 .field-name {
+    width: 150px !important;
+    flex-shrink: 0 !important;
+}
+
+.node-line-1 .field-desc {
+    flex: 1 !important;
+    min-width: 200px !important;
+}
+
+.node-line-1 .delete-btn {
+    flex-shrink: 0 !important;
+    align-self: flex-end !important;
+    height: 24px !important;
+}
+
+/* LINE 2: Shape through Add Connection */
+.node-line-2 {
+    display: flex !important;
+    gap: 0.375rem !important;
+    align-items: flex-end !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+}
+
+.node-line-2>div:nth-child(1) {
+    width: 80px !important;
+}
+
+/* Shape */
+.node-line-2>div:nth-child(2) {
+    width: 150px !important;
+}
+
+/* System */
+.node-line-2>div:nth-child(3) {
+    width: 150px !important;
+}
+
+/* Subgroup */
+.node-line-2>div:nth-child(4) {
+    width: 45px !important;
+}
+
+/* Text */
+.node-line-2>div:nth-child(5) {
+    width: 45px !important;
+}
+
+/* Fill */
+.node-line-2>div:nth-child(6) {
+    width: 45px !important;
+}
+
+/* Outline */
+
+.node-line-2>div {
+    flex-shrink: 0 !important;
+}
+
+.node-line-2 .add-conn-btn {
+    flex-shrink: 0 !important;
+    align-self: flex-end !important;
+    height: 24px !important;
+}
+
+/* LINE 3: Connections */
+.node-line-3 {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0.5rem !important;
+}
+
+.connections-container {
+    display: block !important;
+    width: 100% !important;
+    background: var(--bg-secondary) !important;
+    padding: 0.5rem !important;
+    border-radius: 4px !important;
+}
+
+/* Connection rows - horizontal */
+.connection-wrapper-adv {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.375rem !important;
+    align-items: flex-end !important;
+    padding: 0.375rem !important;
+    background: var(--bg-primary) !important;
+    border-radius: 3px !important;
+    margin-bottom: 0.375rem !important;
+}
+
+/* Field wrapper styling */
+.field-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.125rem !important;
+}
+
+.field-wrapper label {
+    font-size: 0.65rem !important;
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    height: 14px !important;
+    line-height: 14px !important;
+}
+
+.field-wrapper input[type="text"],
+.field-wrapper select,
+.field-wrapper textarea {
+    height: 24px !important;
+    padding: 0.25rem 0.375rem !important;
+    font-size: 0.7rem !important;
+}
+
+.field-wrapper textarea {
+    resize: vertical !important;
+    min-height: 24px !important;
+}
+
+.field-wrapper input[type="color"] {
+    width: 100% !important;
+    height: 24px !important;
+    padding: 1px !important;
+}
+
+/* Remove any title bar name field since we have it in line 1 */
+.node-title-bar {
+    display: none !important;
+}
+
+/* Collapse button adjustment */
+.node-collapse-btn {
+    position: absolute !important;
+    left: 0.5rem !important;
+    top: 0.5rem !important;
+}
+
+.node {
+    position: relative !important;
+    padding-top: 0 !important;
+}

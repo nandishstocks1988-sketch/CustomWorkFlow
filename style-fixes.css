@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Critical Style Fixes and Overrides
+   ========================================================================== */
+
+/* Fix label visibility */
+label {
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+}
+
+/* Fix input and select styling */
+input[type="text"],
+input[type="color"],
+textarea,
+select {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Fix system form inputs */
+#add-system-form input[type="text"] {
+    flex: 1;
+    max-width: 300px;
+}
+
+#add-system-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.form-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Fix system blocks */
+.system-block {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+}
+
+.system-block-header {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.system-block-header input[type="text"] {
+    max-width: 150px;
+}
+
+.system-block-header select {
+    max-width: 120px;
+}
+
+/* Fix node styling */
+.node {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+}
+
+.node-title-bar {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+}
+
+.node-inner-grid {
+    padding: 0.75rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.node-inner-grid>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.node-inner-grid label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Fix connection styling */
+.connections-container {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.connection-wrapper-adv {
+    background: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.conn-field {
+    flex: 1;
+    min-width: 100px;
+}
+
+.conn-field label {
+    font-size: 0.625rem !important;
+    margin-bottom: 0.125rem !important;
+}
+
+.conn-field select,
+.conn-field input {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+}
+
+/* Fix button styling */
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+}
+
+.btn.secondary {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn.subtle {
+    background-color: transparent;
+    color: var(--text-secondary);
+}
+
+.small-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Fix subgroup styling */
+.subgroup-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-primary);
+    border-radius: 0.25rem;
+}
+
+.subgroup-row input[type="text"] {
+    flex: 1;
+    max-width: 150px;
+}
+
+.subgroup-row select {
+    max-width: 100px;
+}
+
+/* Fix color input sizing */
+input[type="color"] {
+    width: 36px;
+    height: 30px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+/* Dark mode specific fixes */
+[data-theme="dark"] {
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-tertiary: #374151;
+    --border: #374151;
+    --border-hover: #4b5563;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .system-block,
+[data-theme="dark"] .node {
+    background: var(--bg-tertiary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .system-block-header,
+[data-theme="dark"] .node-title-bar {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .connections-container {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .connection-wrapper-adv {
+    background: var(--bg-tertiary);
+}
+
+/* Panel improvements */
+.panel {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] .panel {
+    background: var(--bg-tertiary);
+}
+
+/* Fix collapsed button positioning */
+.system-collapse-btn,
+.node-collapse-btn {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.system-block,
+.node {
+    position: relative;
+    padding-left: 2rem;
+}
+
+/* Fix drag handle */
+.system-drag-handle {
+    position: absolute;
+    left: 1.5rem;
+    top: 0.5rem;
+    cursor: move;
+    color: var(--text-muted);
+    padding: 0.25rem;
+}
+
+/* Glass morphism adjustments for better contrast */
+.panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .panel {
+    background: rgba(31, 41, 55, 0.95);
+}
+
+/* Fix form group styling */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Ensure text is readable */
+* {
+    color: inherit;
+}
+
+/* Fix specific overrides from style-ultimate.css */
+.app-header {
+    background: var(--bg-primary);
+    backdrop-filter: none;
+}
+
+[data-theme="dark"] .app-header {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Fix button visibility */
+.btn:not(.subtle) {
+    font-weight: 500;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: white !important;
+}
+
+.btn.secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .btn.secondary {
+    background: var(--bg-tertiary);
+    border-color: var(--border);
+}
+
+/* Fix hint text */
+.hint {
+    color: var(--text-muted) !important;
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+/* Remove excessive glass effects for better readability */
+.system-block,
+.node,
+.panel {
+    backdrop-filter: none;
+}
+
+/* Improve select visibility */
+select option {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] select option {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Fix floating labels from ultimate styles */
+.form-group input:focus~label,
+.form-group input:not(:placeholder-shown)~label {
+    transform: none;
+    position: static;
+    color: var(--text-secondary);
+}
+
+/* Reset excessive animations */
+.panel,
+.system-block,
+.node {
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Fix legend editor */
+.legend-editor {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .legend-editor {
+    background: var(--bg-tertiary);
+}
+
+/* Ensure proper spacing */
+.panel-content {
+    padding: 1rem;
+}
+
+.system-body {
+    padding: 0.75rem;
+}
+
+/* Fix delete button visibility */
+.delete-btn {
+    background: var(--danger) !important;
+    color: white !important;
+}
+
+/* Ensure tooltips are visible */
+[data-tooltip]::after {
+    background: var(--gray-900);
+    color: white;
+    z-index: 10000;
+}
+
+[data-theme="dark"] [data-tooltip]::after {
+    background: var(--gray-100);
+    color: var(--gray-900);
+}

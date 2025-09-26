@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Advanced Animations and Effects
+   ========================================================================== */
+
+/* Ripple gradient effect */
+.ripple-gradient {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    transform: scale(0);
+    animation: ripple-gradient 1s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-gradient {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Save indicator */
+.save-indicator {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: var(--success);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transform: translateX(calc(100% + 2rem));
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 10000;
+}
+
+.save-indicator.show {
+    transform: translateX(0);
+}
+
+/* Enhanced toast animations */
+.toast-animated {
+    animation: toast-slide-in 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes toast-slide-in {
+    from {
+        transform: translate(-50%, 100px) scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Skeleton loading */
+.skeleton {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.1) 25%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Glow text effect */
+.glow-text {
+    text-shadow:
+        0 0 10px var(--primary-glow),
+        0 0 20px var(--primary-glow),
+        0 0 30px var(--primary-glow);
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    from {
+        text-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    to {
+        text-shadow: 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow);
+    }
+}
+
+/* Floating animation */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Gradient border animation */
+.gradient-border-animated {
+    background: linear-gradient(45deg,
+            var(--primary),
+            var(--secondary),
+            var(--accent),
+            var(--primary));
+    background-size: 300% 300%;
+    animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Focus ring animation */
+@keyframes focus-ring {
+    0% {
+        box-shadow: 0 0 0 0 var(--primary-glow);
+    }
+
+    100% {
+        box-shadow: 0 0 0 8px transparent;
+    }
+}
+
+*:focus {
+    animation: focus-ring 0.4s ease-out;
+}
+
+/* Card hover 3D effect */
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+}
+
+.card-3d:hover {
+    transform: perspective(1000px) rotateY(5deg) rotateX(-5deg) scale(1.02);
+}
+
+/* Loading dots */
+.loading-dots {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: loading-bounce 1.4s ease-in-out infinite both;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes loading-bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Confetti animation for success */
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    animation: confetti-fall 3s linear forwards;
+}

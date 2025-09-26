@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>System Flow Designer - Visual Workflow Builder</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Create beautiful system architecture diagrams with drag-and-drop simplicity" />
+
+    <!-- Add modern icon font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Core styles -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-additions.css" />
+    <link rel="stylesheet" href="style-help-docs.css" />
+    <link rel="stylesheet" href="style-help-docs-beautiful.css" />
+    <link rel="stylesheet" href="style-animations.css" />
+    <link rel="stylesheet" href="style-ultimate.css" />
+    <link rel="stylesheet" href="style-fixes-v2.css" />
+    <link rel="stylesheet" href="style-comprehensive-fix.css" />
+    <link rel="stylesheet" href="style-comprehensive-fix.css" />
+    <link rel="stylesheet" href="style-systems-list-fix.css" />
+    <!-- CRITICAL: Fix file must be loaded last -->
+    <link rel="stylesheet" href="style-fixes.css" />
+    <link rel="stylesheet" href="style-comprehensive-fix.css" />
+    <link rel="stylesheet" href="style-systems-list-fix.css" />
+    <link rel="stylesheet" href="style-node-3-line-fix.css" />
+
+    <!-- Mermaid & export libs -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- mxGraph preload (MUST be before mxClient) -->
+    <script src="script/mxgraph-preload.js"></script>
+
+    <!-- mxGraph client -->
+    <script>
+        window.mxBasePath = '';
+        window.mxLoadResources = false;
+        window.mxLoadStylesheets = false;
+        window.mxImageBasePath = '';
+    </script>
+    <script src="https://unpkg.com/mxgraph/javascript/mxClient.min.js"></script>
+
+    <!-- Sortable for drag and drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <!-- Application scripts -->
+    <script src="script/core.js"></script>
+    <script src="script/systems.js"></script>
+    <script src="script/nodes.js"></script>
+    <script src="script/layout.js"></script>
+    <script src="script/diagram.js"></script>
+    <script src="script/export.js"></script>
+    <script src="script/legend.js"></script>
+    <script src="script/mxgraph-fix.js"></script>
+    <script src="script/mxgraph-integration.js"></script>
+    <script src="script/import-export.js"></script>
+    <script src="script/theme.js"></script>
+    <script src="script/help-docs.js"></script>
+    <script src="script/help-docs-enhanced.js"></script>
+    <script src="script/ui-enhancements.js"></script>
+    <script src="script/drag-animations.js"></script>
+    <script src="script/ui-ultimate.js"></script>
+    <script src="script/events.js"></script>
+    <script src="script/fix-node-button.js"></script>
+    <script src="script/init.js"></script>
+    <script src="script/input-auto-width.js"></script>
+    <script src="script/legend-fix.js"></script>
+
+    <script src="script/systems-list-fix.js"></script>
+    <script src="script/node-layout-fix.js"></script>
+</head>
+
+<!-- Rest of your HTML remains the same -->
+
+<body>
+    <script src="script/legend-fix.js"></script>
+    <script src="script/systems-list-fix.js"></script>
+
+    <header class="app-header">
+        <h1><i class="fas fa-diagram-project"></i> System Flow Designer</h1>
+        <div class="top-actions">
+            <button id="themeToggle" class="btn subtle btn-icon" data-tooltip="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="helpQuickBtn" class="btn subtle">
+                <i class="fas fa-circle-question"></i> Help
+            </button>
+            <button id="docsBtn" class="btn primary">
+                <i class="fas fa-book"></i> Documentation
+            </button>
+        </div>
+    </header>
+
+    <!-- Help Panel -->
+    <!-- Enhanced Help Panel with Quick Access and FAQs -->
+    <div id="helpPanel" class="side-panel hidden">
+        <div class="panel-header">
+            <h2><i class="fas fa-circle-question"></i> Quick Help</h2>
+            <button id="closeHelpBtn" class="btn subtle btn-icon">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-body">
+            <!-- Quick Access Section -->
+            <section class="help-section">
+                <h3><i class="fas fa-rocket"></i> Quick Access</h3>
+                <div class="quick-access-grid">
+                    <button class="quick-access-btn" onclick="document.getElementById('addNodeBtn').click()">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Node</span>
+                        <kbd>Ctrl+N</kbd>
+                    </button>
+                    <button class="quick-access-btn" onclick="document.getElementById('generateBtn').click()">
+                        <i class="fas fa-sync"></i>
+                        <span>Update Diagram</span>
+                        <kbd>Ctrl+U</kbd>
+                    </button>
+                    <button class="quick-access-btn" onclick="document.getElementById('downloadJsonBtn').click()">
+                        <i class="fas fa-save"></i>
+                        <span>Save Project</span>
+                        <kbd>Ctrl+S</kbd>
+                    </button>
+                    <button class="quick-access-btn" onclick="document.getElementById('uploadJSON').click()">
+                        <i class="fas fa-upload"></i>
+                        <span>Load Project</span>
+                        <kbd>Ctrl+O</kbd>
+                    </button>
+                    <button class="quick-access-btn"
+                        onclick="if(window.UltimateUI) window.UltimateUI.showToast('Undo: Ctrl+Z, Redo: Ctrl+Y', 'info')">
+                        <i class="fas fa-undo"></i>
+                        <span>Undo/Redo</span>
+                        <kbd>Ctrl+Z/Y</kbd>
+                    </button>
+                    <button class="quick-access-btn" onclick="document.getElementById('openDocsFromHelp').click()">
+                        <i class="fas fa-book"></i>
+                        <span>Full Docs</span>
+                        <kbd>F1</kbd>
+                    </button>
+                </div>
+            </section>
+
+            <!-- FAQs Section -->
+            <section class="help-section">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>1. How do I create my first system diagram?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Start by adding a System using the form at the top. Systems are containers for your
+                                nodes. Then add nodes and assign them to systems. Finally, click "Update Diagram" to see
+                                your visualization.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>2. Can I drag and drop nodes between systems?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! In the Interactive Graph (mxGraph) view, you can drag nodes between systems. The
+                                changes will automatically sync to the Mermaid diagram.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>3. How do I create connections between nodes?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Connections are defined on the destination node. In the node's connection section, select
+                                the source node, connection type, and style. Connections flow FROM the source TO the
+                                current node.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>4. What's the difference between systems and subgroups?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Systems are top-level containers (like departments or services). Subgroups are nested
+                                containers within systems for further organization (like teams within departments).</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>5. How do I save and share my diagrams?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Use "Export JSON" to save your complete project. Share the JSON file with others who can
+                                import it. For images, export as PNG, PDF, or SVG.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>6. Can I customize node shapes and colors?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Each node has shape options (rectangle, circle, diamond, etc.) and customizable
+                                colors for background, border, and text.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>7. What are connection types (solid, dashed, dotted)?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Different line styles represent different relationship types: Solid (strong/direct),
+                                Dashed (optional/conditional), Dotted (planned/future), Double (bidirectional).</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>8. How do I reorder systems?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Drag the grip handle (⋮) next to system names in the Systems panel, or drag systems in
+                                the Interactive Graph view.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>9. What's the legend for?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The legend explains your diagram's color coding and symbols. It appears on exports and
+                                can be toggled as an overlay on the diagram preview.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>10. Can I work offline?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! The tool works completely offline. Your data is stored locally in your browser. Use
+                                JSON export/import to backup your work.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>11. How do I handle large diagrams?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Use subgroups to organize nodes, collapse systems you're not working on, and use the
+                                search feature to quickly find nodes. The Interactive Graph supports zoom and pan.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>12. Can I import from other tools?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Currently, import is supported via JSON format. You can also manually recreate diagrams
+                                from other tools using our intuitive interface.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>13. What browsers are supported?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Modern versions of Chrome, Firefox, Safari, and Edge are fully supported. The tool uses
+                                standard web technologies for maximum compatibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>14. How do I report bugs or request features?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Visit our GitHub repository to report issues or request features. Your feedback helps
+                                improve the tool for everyone!</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>15. Are there any keyboard shortcuts?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Ctrl+N (new node), Ctrl+U (update diagram), Ctrl+S (save), Ctrl+O (open), Ctrl+Z/Y
+                                (undo/redo), F1 (help), Esc (close dialogs).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button id="openDocsFromHelp" class="btn primary block" style="margin-top: 1rem;">
+                <i class="fas fa-book-open"></i> Open Full Documentation
+            </button>
+        </div>
+    </div>
+
+    <!-- Documentation Panel -->
+    <!-- Enhanced Documentation Panel with Tabs -->
+    <div id="docsPanel" class="side-panel hidden wide">
+        <div class="panel-header">
+            <h2><i class="fas fa-book"></i> Documentation</h2>
+            <button id="closeDocsBtn" class="btn subtle btn-icon">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-body">
+            <!-- Documentation Tabs -->
+            <div class="doc-tabs">
+                <button class="doc-tab active" data-tab="getting-started">
+                    <i class="fas fa-play"></i> Getting Started
+                </button>
+                <button class="doc-tab" data-tab="systems">
+                    <i class="fas fa-folder"></i> Systems
+                </button>
+                <button class="doc-tab" data-tab="nodes">
+                    <i class="fas fa-circle-nodes"></i> Nodes
+                </button>
+                <button class="doc-tab" data-tab="connections">
+                    <i class="fas fa-arrows-alt-h"></i> Connections
+                </button>
+                <button class="doc-tab" data-tab="styling">
+                    <i class="fas fa-palette"></i> Styling
+                </button>
+                <button class="doc-tab" data-tab="interactive">
+                    <i class="fas fa-hand-pointer"></i> Interactive
+                </button>
+                <button class="doc-tab" data-tab="export">
+                    <i class="fas fa-file-export"></i> Export/Import
+                </button>
+                <button class="doc-tab" data-tab="advanced">
+                    <i class="fas fa-cog"></i> Advanced
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="doc-content">
+                <!-- Getting Started Tab -->
+                <div id="doc-getting-started" class="doc-tab-content active">
+                    <h3>Getting Started</h3>
+                    <p class="doc-intro">Welcome to System Flow Designer! This tool helps you create beautiful system
+                        architecture diagrams with ease.</p>
+
+                    <h4>Quick Start Guide</h4>
+                    <ol class="doc-steps">
+                        <li>
+                            <strong>Create a System</strong>
+                            <p>Systems are containers for your nodes. Start by adding at least one system.</p>
+                            <pre class="code-example">Example: "Frontend", "Backend", "Database"</pre>
+                        </li>
+                        <li>
+                            <strong>Add Nodes</strong>
+                            <p>Nodes represent components within your systems.</p>
+                            <pre class="code-example">Example: "React App", "API Server", "PostgreSQL"</pre>
+                        </li>
+                        <li>
+                            <strong>Define Connections</strong>
+                            <p>Show how components interact by adding connections.</p>
+                            <pre class="code-example">Example: React App → API Server → Database</pre>
+                        </li>
+                        <li>
+                            <strong>Update & Preview</strong>
+                            <p>Click "Update Diagram" to see your visualization in both Mermaid and Interactive views.
+                            </p>
+                        </li>
+                    </ol>
+
+                    <div class="doc-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Pro Tip:</strong> Use keyboard shortcuts for faster workflow. Press F1 anytime to see
+                        all shortcuts.
+                    </div>
+                </div>
+
+                <!-- Systems Tab -->
+                <div id="doc-systems" class="doc-tab-content">
+                    <h3>Systems Management</h3>
+
+                    <h4>Creating Systems</h4>
+                    <p>Systems are the top-level containers in your diagram. They represent major components or
+                        services.</p>
+
+                    <div class="doc-feature">
+                        <h5>System Properties</h5>
+                        <ul>
+                            <li><strong>Name:</strong> Unique identifier for the system</li>
+                            <li><strong>Colors:</strong> Border (stroke) and background (fill) colors</li>
+                            <li><strong>Layout:</strong> Vertical or horizontal arrangement of nodes inside</li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-example">
+                        <h5>Example: Microservices Architecture</h5>
+                        <pre class="code-example">
+Systems:
+- API Gateway (Blue border, Light blue fill)
+- User Service (Green border, Light green fill)
+- Order Service (Orange border, Light orange fill)
+- Payment Service (Purple border, Light purple fill)
+                    </pre>
+                    </div>
+
+                    <h4>Organizing Systems</h4>
+                    <ul>
+                        <li><strong>Drag to Reorder:</strong> Use the grip handle (⋮) to drag systems</li>
+                        <li><strong>Collapse/Expand:</strong> Click the arrow to hide/show system contents</li>
+                        <li><strong>Edit Properties:</strong> Click the edit button to modify system settings</li>
+                        <li><strong>Delete System:</strong> Remove a system (nodes will become unassigned)</li>
+                    </ul>
+
+                    <div class="doc-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Note:</strong> Deleting a system doesn't delete its nodes. They become unassigned and
+                        need to be reassigned or deleted separately.
+                    </div>
+                </div>
+
+                <!-- Nodes Tab -->
+                <div id="doc-nodes" class="doc-tab-content">
+                    <h3>Node Management</h3>
+
+                    <h4>Node Properties</h4>
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <h5><i class="fas fa-tag"></i> Basic Info</h5>
+                            <ul>
+                                <li><strong>ID:</strong> Unique identifier (auto-generated)</li>
+                                <li><strong>Name:</strong> Display label</li>
+                                <li><strong>Description:</strong> Detailed info (shows in tooltip)</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-shapes"></i> Shape Options</h5>
+                            <ul>
+                                <li><strong>Rectangle:</strong> Default shape</li>
+                                <li><strong>Circle:</strong> For services/processes</li>
+                                <li><strong>Diamond:</strong> For decisions</li>
+                                <li><strong>Cylinder:</strong> For databases</li>
+                                <li><strong>Stadium:</strong> For start/end points</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-paint-brush"></i> Styling</h5>
+                            <ul>
+                                <li><strong>Background:</strong> Fill color</li>
+                                <li><strong>Border:</strong> Outline color</li>
+                                <li><strong>Text:</strong> Label color</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-sitemap"></i> Organization</h5>
+                            <ul>
+                                <li><strong>System:</strong> Parent container</li>
+                                <li><strong>Subgroup:</strong> Optional sub-container</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="doc-example">
+                        <h5>Example: Database Node</h5>
+                        <pre class="code-example">
+Node: user_db
+Name: User Database
+Shape: Cylinder
+Colors: #2e86ab (bg), #023e8a (border), #ffffff (text)
+System: Database Layer
+Description: PostgreSQL database for user management
+                    </pre>
+                    </div>
+                </div>
+
+                <!-- Connections Tab -->
+                <div id="doc-connections" class="doc-tab-content">
+                    <h3>Connection Management</h3>
+
+                    <h4>Understanding Connections</h4>
+                    <p>Connections show relationships and data flow between nodes. They are defined on the
+                        <strong>destination node</strong>.
+                    </p>
+
+                    <div class="doc-feature">
+                        <h5>Connection Types</h5>
+                        <div class="connection-types">
+                            <div class="conn-type">
+                                <span class="conn-line solid"></span>
+                                <strong>Solid:</strong> Direct/strong connection
+                            </div>
+                            <div class="conn-type">
+                                <span class="conn-line dashed"></span>
+                                <strong>Dashed:</strong> Optional/conditional
+                            </div>
+                            <div class="conn-type">
+                                <span class="conn-line dotted"></span>
+                                <strong>Dotted:</strong> Planned/future
+                            </div>
+                            <div class="conn-type">
+                                <span class="conn-line double"></span>
+                                <strong>Double:</strong> Bidirectional
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Connection Properties</h4>
+                    <ul>
+                        <li><strong>Source:</strong> Where the connection comes FROM</li>
+                        <li><strong>Type:</strong> Line style (solid, dashed, dotted, double)</li>
+                        <li><strong>Arrow:</strong> Show/hide arrowhead</li>
+                        <li><strong>Label:</strong> Text on the connection line</li>
+                        <li><strong>Color:</strong> Line color</li>
+                        <li><strong>Width:</strong> Line thickness (1-6)</li>
+                    </ul>
+
+                    <div class="doc-example">
+                        <h5>Example: API Connection</h5>
+                        <pre class="code-example">
+From: web_app
+To: api_server (current node)
+Type: Solid
+Label: "REST API"
+Color: #2196F3
+Width: 2
+Arrow: Yes
+                    </pre>
+                    </div>
+
+                    <div class="doc-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Tip:</strong> Use consistent connection styles across your diagram. For example, always
+                        use dashed lines for optional dependencies.
+                    </div>
+                </div>
+
+                <!-- Styling Tab -->
+                <div id="doc-styling" class="doc-tab-content">
+                    <h3>Styling & Customization</h3>
+
+                    <h4>Color Schemes</h4>
+                    <p>Create visually appealing diagrams with consistent color schemes.</p>
+
+                    <div class="doc-feature">
+                        <h5>Recommended Color Patterns</h5>
+                        <div class="color-patterns">
+                            <div class="pattern">
+                                <h6>By Layer</h6>
+                                <div class="color-swatch" style="background: #e3f2fd;">Frontend: Blues</div>
+                                <div class="color-swatch" style="background: #e8f5e9;">Backend: Greens</div>
+                                <div class="color-swatch" style="background: #fff3e0;">Database: Oranges</div>
+                            </div>
+                            <div class="pattern">
+                                <h6>By Status</h6>
+                                <div class="color-swatch" style="background: #e8f5e9;">Active: Green</div>
+                                <div class="color-swatch" style="background: #fff9c4;">Warning: Yellow</div>
+                                <div class="color-swatch" style="background: #ffebee;">Critical: Red</div>
+                            </div>
+                            <div class="pattern">
+                                <h6>By Environment</h6>
+                                <div class="color-swatch" style="background: #e1f5fe;">Development: Cyan</div>
+                                <div class="color-swatch" style="background: #f3e5f5;">Staging: Purple</div>
+                                <div class="color-swatch" style="background: #ffebee;">Production: Red</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Legend Editor</h4>
+                    <p>Create a legend to explain your color coding and symbols.</p>
+                    <ul>
+                        <li>Use the color palette for quick formatting</li>
+                        <li>Add text colors and highlights</li>
+                        <li>Create color swatches with labels</li>
+                        <li>Toggle legend overlay on diagram</li>
+                    </ul>
+
+                    <div class="doc-example">
+                        <h5>Example Legend</h5>
+                        <pre class="code-example">
+<span style="background:#4CAF50;color:white;padding:2px 6px;">Active</span> - Currently running services
+<span style="background:#FFC107;color:black;padding:2px 6px;">Maintenance</span> - Under maintenance
+<span style="background:#F44336;color:white;padding:2px 6px;">Deprecated</span> - To be removed
+                    </pre>
+                    </div>
+                </div>
+
+                <!-- Interactive Tab -->
+                <div id="doc-interactive" class="doc-tab-content">
+                    <h3>Interactive Graph (mxGraph)</h3>
+
+                    <h4>Features</h4>
+                    <p>The interactive graph provides a dynamic way to work with your diagram.</p>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <h5><i class="fas fa-arrows-alt"></i> Drag & Drop</h5>
+                            <ul>
+                                <li>Move nodes between systems</li>
+                                <li>Reposition systems</li>
+                                <li>Rearrange layouts visually</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-edit"></i> Direct Editing</h5>
+                            <ul>
+                                <li>Double-click to edit labels</li>
+                                <li>Resize nodes and systems</li>
+                                <li>Create connections by dragging</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-search-plus"></i> Navigation</h5>
+                            <ul>
+                                <li>Zoom in/out with mouse wheel</li>
+                                <li>Pan by dragging background</li>
+                                <li>Fit diagram to view</li>
+                            </ul>
+                        </div>
+
+                        <div class="doc-card">
+                            <h5><i class="fas fa-sync"></i> Synchronization</h5>
+                            <ul>
+                                <li>Changes sync to Mermaid view</li>
+                                <li>Updates reflect in node list</li>
+                                <li>Automatic layout adjustment</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="doc-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Tip:</strong> Use the Interactive Graph for quick reorganization, then fine-tune in the
+                        node properties panel.
+                    </div>
+                </div>
+
+                <!-- Export/Import Tab -->
+                <div id="doc-export" class="doc-tab-content">
+                    <h3>Export & Import</h3>
+
+                    <h4>Export Options</h4>
+                    <div class="export-grid">
+                        <div class="export-option">
+                            <h5><i class="fas fa-file-code"></i> JSON Export</h5>
+                            <p>Complete project data including all nodes, systems, connections, and styling.</p>
+                            <ul>
+                                <li>Full backup of your work</li>
+                                <li>Share with team members</li>
+                                <li>Version control friendly</li>
+                            </ul>
+                        </div>
+
+                        <div class="export-option">
+                            <h5><i class="fas fa-image"></i> PNG Export</h5>
+                            <p>High-quality raster image for presentations and documentation.</p>
+                            <ul>
+                                <li>Includes legend if enabled</li>
+                                <li>Transparent background option</li>
+                                <li>High DPI support</li>
+                            </ul>
+                        </div>
+
+                        <div class="export-option">
+                            <h5><i class="fas fa-file-pdf"></i> PDF Export</h5>
+                            <p>Vector-based PDF for printing and archival.</p>
+                            <ul>
+                                <li>Scalable without quality loss</li>
+                                <li>Includes metadata</li>
+                                <li>Print-ready format</li>
+                            </ul>
+                        </div>
+
+                        <div class="export-option">
+                            <h5><i class="fas fa-vector-square"></i> SVG Export</h5>
+                            <p>Scalable vector graphics for web and editing.</p>
+                            <ul>
+                                <li>Edit in vector programs</li>
+                                <li>Embed in websites</li>
+                                <li>Infinite scalability</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Import Process</h4>
+                    <ol>
+                        <li>Click "Import" or drag JSON file to upload area</li>
+                        <li>Review import preview</li>
+                        <li>Confirm to replace current diagram</li>
+                    </ol>
+
+                    <div class="doc-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Warning:</strong> Importing a JSON file will replace your current diagram. Always export
+                        your work first!
+                    </div>
+                </div>
+
+                <!-- Advanced Tab -->
+                <div id="doc-advanced" class="doc-tab-content">
+                    <h3>Advanced Features</h3>
+
+                    <h4>Keyboard Shortcuts</h4>
+                    <div class="shortcuts-grid">
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>N</kbd>
+                            <span>New Node</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>S</kbd>
+                            <span>Save (Export JSON)</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>O</kbd>
+                            <span>Open (Import JSON)</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>U</kbd>
+                            <span>Update Diagram</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>Z</kbd>
+                            <span>Undo</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl</kbd> + <kbd>Y</kbd>
+                            <span>Redo</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>F1</kbd>
+                            <span>Help</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Esc</kbd>
+                            <span>Close Dialog</span>
+                        </div>
+                    </div>
+
+                    <h4>Performance Tips</h4>
+                    <ul>
+                        <li><strong>Large Diagrams:</strong> Collapse unused systems to improve performance</li>
+                        <li><strong>Complex Connections:</strong> Use subgroups to organize related nodes</li>
+                        <li><strong>Browser Memory:</strong> Export and reload periodically for very large projects</li>
+                    </ul>
+
+                    <h4>Troubleshooting</h4>
+                    <div class="troubleshooting">
+                        <div class="issue">
+                            <strong>Diagram not updating?</strong>
+                            <p>Ensure you've clicked "Update Diagram" after making changes.</p>
+                        </div>
+                        <div class="issue">
+                            <strong>Connections not showing?</strong>
+                            <p>Check that source nodes exist and connection properties are set correctly.</p>
+                        </div>
+                        <div class="issue">
+                            <strong>Export not working?</strong>
+                            <p>Try a different browser or disable ad blockers that might interfere.</p>
+                        </div>
+                    </div>
+
+                    <h4>Best Practices</h4>
+                    <ul>
+                        <li>Use consistent naming conventions for nodes</li>
+                        <li>Group related functionality in systems</li>
+                        <li>Add descriptions to complex nodes</li>
+                        <li>Export JSON regularly as backup</li>
+                        <li>Use the legend to explain color coding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Toolbar -->
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <button id="addNodeBtn" class="btn primary">
+                <i class="fas fa-plus-circle"></i> Add Node
+            </button>
+            <button id="generateBtn" class="btn secondary">
+                <i class="fas fa-sync"></i> Update Diagram
+            </button>
+        </div>
+
+        <div class="toolbar-group">
+            <button id="downloadJsonBtn" class="btn secondary" data-tooltip="Export JSON">
+                <i class="fas fa-download"></i> JSON
+            </button>
+            <label class="btn secondary" data-tooltip="Import JSON">
+                <i class="fas fa-upload"></i> Import
+                <input id="uploadJSON" type="file" accept="application/json" style="display: none;" />
+            </label>
+            <div class="btn-group">
+                <button id="downloadPngBtn" class="btn secondary" data-tooltip="Export PNG">
+                    <i class="fas fa-image"></i>
+                </button>
+                <button id="downloadPdfBtn" class="btn secondary" data-tooltip="Export PDF">
+                    <i class="fas fa-file-pdf"></i>
+                </button>
+                <button id="downloadSvgBtn" class="btn secondary" data-tooltip="Export SVG">
+                    <i class="fas fa-vector-square"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="toolbar-group">
+            <div class="stack">
+                <label>Page Background</label>
+                <select id="pageBgColor" class="select-sm">
+                    <option value="#f3f6fa">Light</option>
+                    <option value="#ffffff">White</option>
+                    <option value="#1a1a1a">Dark</option>
+                    <option value="#f8f5ff">Lavender</option>
+                    <option value="#eefaf4">Mint</option>
+                </select>
+            </div>
+
+            <div class="stack">
+                <label>Diagram Background</label>
+                <input id="diagramBgColor" type="color" value="#ffffff" />
+            </div>
+
+            <div class="stack">
+                <label>Layout</label>
+                <select id="systemsArrangementSelect" class="select-sm">
+                    <option value="vertical" selected>Vertical</option>
+                    <option value="horizontal">Horizontal</option>
+                </select>
+            </div>
+
+            <label class="inline-chk">
+                <input id="exportDescriptionsChk" type="checkbox" checked />
+                <span>Include descriptions in exports</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Enhanced Systems Panel -->
+    <section id="system-manager" class="panel collapsible" data-panel="systems">
+        <div class="panel-header-main">
+            <h2><i class="fas fa-folder-tree"></i> Systems & Subgroups</h2>
+            <div class="panel-header-actions">
+                <button id="collapseAllSystemsBtn" class="btn subtle small">
+                    <i class="fas fa-compress"></i> Collapse
+                </button>
+                <button id="expandAllSystemsBtn" class="btn subtle small">
+                    <i class="fas fa-expand"></i> Expand
+                </button>
+                <button class="btn subtle btn-icon section-collapse-btn" data-target="systems">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div id="noSystemsHint" class="hint"></div>
+            <form id="add-system-form" autocomplete="off" class="sys-form">
+                <div class="form-row">
+                    <input id="sysNameInput" placeholder="System name" required />
+                    <input id="sysStrokeInput" type="color" value="#333333" data-tooltip="Border color" />
+                    <input id="sysFillInput" type="color" value="#ffffff" data-tooltip="Fill color" />
+                    <select id="sysLayoutSelect" data-tooltip="Node arrangement">
+                        <option value="vertical">↓ Vertical</option>
+                        <option value="horizontal">→ Horizontal</option>
+                    </select>
+                    <button type="submit" class="btn primary">
+                        <i class="fas fa-plus"></i> Add System
+                    </button>
+                </div>
+            </form>
+
+            <h3 style="margin-top:1.5rem;">
+                <i class="fas fa-grip-vertical"></i> Systems
+                <span class="hint">(Drag to reorder)</span>
+            </h3>
+            <div id="system-list" class="draggable-systems"></div>
+        </div>
+    </section>
+
+    <!-- Enhanced Nodes Panel -->
+    <section id="nodes-panel" class="panel collapsible" data-panel="nodes">
+        <div class="panel-header-main">
+            <h2><i class="fas fa-circle-nodes"></i> Nodes</h2>
+            <div class="panel-header-actions">
+                <button id="collapseAllNodesBtn" class="btn subtle small">
+                    <i class="fas fa-compress"></i> Collapse
+                </button>
+                <button id="expandAllNodesBtn" class="btn subtle small">
+                    <i class="fas fa-expand"></i> Expand
+                </button>
+                <button class="btn subtle btn-icon section-collapse-btn" data-target="nodes">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <button id="addNodeEndBtn" type="button" class="btn primary" style="margin-bottom:1rem;">
+                <i class="fas fa-plus-circle"></i> Add Node
+            </button>
+            <div id="nodes-container"></div>
+        </div>
+    </section>
+
+    <!-- Enhanced Legend Panel -->
+    <section id="legend-panel" class="panel collapsible" data-panel="legend">
+        <div class="panel-header-main">
+            <h2><i class="fas fa-tag"></i> Legend Editor</h2>
+            <div class="panel-header-actions">
+                <button class="btn subtle btn-icon section-collapse-btn" data-target="legend">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div class="legend-toolbar">
+                <div class="palette">
+                    <span class="lbl">Quick Colors:</span>
+                    <button class="color-btn" data-color="#000000" data-tooltip="Black">⬛</button>
+                    <button class="color-btn" data-color="#d0021b" data-tooltip="Red">🟥</button>
+                    <button class="color-btn" data-color="#f5a623" data-tooltip="Orange">🟧</button>
+                    <button class="color-btn" data-color="#f8e71c" data-tooltip="Yellow">🟨</button>
+                    <button class="color-btn" data-color="#7ed321" data-tooltip="Green">🟩</button>
+                    <button class="color-btn" data-color="#4a90e2" data-tooltip="Blue">🟦</button>
+                    <button class="color-btn" data-color="#9013fe" data-tooltip="Purple">🟪</button>
+                </div>
+                <div class="legend-controls">
+                    <div class="control-group">
+                        <label class="inline">
+                            <span>Text</span>
+                            <input type="color" id="legendTextColorPicker" value="#222222" />
+                        </label>
+                        <button id="applyLegendTextColorBtn" class="btn subtle small">Apply</button>
+                    </div>
+                    <div class="control-group">
+                        <label class="inline">
+                            <span>Highlight</span>
+                            <input type="color" id="legendBgColorPicker" value="#ffff66" />
+                        </label>
+                        <button id="applyLegendBgColorBtn" class="btn subtle small">Apply</button>
+                    </div>
+                    <button id="addSwatchBtn" class="btn primary small">
+                        <i class="fas fa-swatchbook"></i> Add Swatch
+                    </button>
+                    <button id="clearLegendBtn" class="btn danger small">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button id="toggleLegendOverlayBtn" class="btn secondary small">
+                        <i class="fas fa-eye"></i> Toggle Overlay
+                    </button>
+                </div>
+            </div>
+            <div id="legendEditor" class="legend-editor" contenteditable="true" spellcheck="false">
+                <p><b>Legend Example:</b>
+                    <span style="background:#4a90e2;color:#fff;padding:2px 6px;border-radius:4px;">API</span>
+                    Blue indicates API nodes.
+                </p>
+            </div>
+            <p class="hint">
+                <i class="fas fa-info-circle"></i> Select text, then apply color or highlight. Overlay shows on diagram.
+            </p>
+        </div>
+    </section>
+
+    <!-- Enhanced Diagram Preview -->
+    <section id="diagram-panel" class="panel collapsible" data-panel="diagram">
+        <div class="panel-header-main">
+            <h2><i class="fas fa-diagram-project"></i> Diagram Preview</h2>
+            <div class="panel-header-actions">
+                <button id="zoomInBtn" class="btn subtle btn-icon" data-tooltip="Zoom In">
+                    <i class="fas fa-magnifying-glass-plus"></i>
+                </button>
+                <button id="zoomOutBtn" class="btn subtle btn-icon" data-tooltip="Zoom Out">
+                    <i class="fas fa-magnifying-glass-minus"></i>
+                </button>
+                <button id="zoomResetBtn" class="btn subtle btn-icon" data-tooltip="Reset Zoom">
+                    <i class="fas fa-magnifying-glass"></i>
+                </button>
+                <button class="btn subtle btn-icon section-collapse-btn" data-target="diagram">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div id="diagram" class="diagram-surface">
+                <div id="legendOverlay" class="legend-overlay hidden">
+                    <div class="legend-overlay-header">
+                        <span>Legend</span>
+                        <button id="hideLegendOverlayBtn" class="btn subtle small">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="legendOverlayContent"></div>
+                </div>
+                <div id="nodeTooltip" class="node-tooltip hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced mxGraph Preview -->
+    <section class="panel" id="mxgraph-panel">
+        <div class="panel-header-main">
+            <h2><i class="fas fa-project-diagram"></i> Interactive Graph</h2>
+            <div class="panel-header-actions">
+                <button id="showPreviewBtn" class="btn secondary">
+                    <i class="fas fa-play"></i> Show Preview
+                </button>
+                <button id="fullscreenMxBtn" class="btn subtle btn-icon" data-tooltip="Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div id="mxgraph-container"></div>
+        </div>
+    </section>
+
+    <!-- Enhanced Floating Actions -->
+    <div id="floatingActions">
+        <button id="fabAddNodeBtn" class="fab" data-tooltip="Add Node">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button id="fabUpdateBtn" class="fab secondary" data-tooltip="Update Diagram">
+            <i class="fas fa-sync"></i>
+        </button>
+        <button id="fabJsonBtn" class="fab secondary" data-tooltip="Export JSON">
+            <i class="fas fa-download"></i>
+        </button>
+        <label class="fab secondary file-label" data-tooltip="Import JSON">
+            <i class="fas fa-upload"></i>
+            <input type="file" id="fabUploadJSON" accept="application/json" style="display: none;" />
+        </label>
+        <button id="fabPngBtn" class="fab secondary" data-tooltip="Export Image">
+            <i class="fas fa-image"></i>
+        </button>
+        <button id="fabPdfBtn" class="fab secondary" data-tooltip="Export PDF">
+            <i class="fas fa-file-pdf"></i>
+        </button>
+        <button id="fabSvgBtn" class="fab secondary" data-tooltip="Export SVG">
+            <i class="fas fa-vector-square"></i>
+        </button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+</body>
+
+</html>

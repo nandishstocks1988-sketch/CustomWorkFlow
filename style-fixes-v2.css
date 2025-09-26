@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Critical Style Fixes v2 - Addressing specific issues
+   ========================================================================== */
+
+/* Fix panel header visibility */
+.panel-header-main h2 {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Fix all text visibility in panels */
+.panel h1,
+.panel h2,
+.panel h3,
+.panel h4,
+.panel h5,
+.panel h6,
+.panel p,
+.panel span,
+.panel label {
+    color: var(--text-primary) !important;
+}
+
+/* Fix system form layout - compact and responsive */
+#add-system-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#add-system-form .form-row {
+    display: contents;
+    /* This allows child elements to participate in parent flex */
+}
+
+/* System name input - starts small, grows with content */
+#sysNameInput {
+    width: 150px;
+    /* Initial width */
+    min-width: 120px;
+    max-width: 300px;
+    flex: 0 1 auto;
+    /* Don't grow by default, but can shrink */
+    transition: width 0.2s ease;
+}
+
+/* Auto-expand on focus and when has content */
+#sysNameInput:focus,
+#sysNameInput:not(:placeholder-shown) {
+    width: 200px;
+}
+
+/* Keep color inputs compact */
+#sysStrokeInput,
+#sysFillInput {
+    width: 40px !important;
+    height: 32px;
+    flex: 0 0 auto;
+}
+
+/* System layout select - compact */
+#sysLayoutSelect {
+    width: auto;
+    min-width: 100px;
+    max-width: 120px;
+    flex: 0 0 auto;
+}
+
+/* Add System button - stays beside inputs */
+#add-system-form button[type="submit"] {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* Fix label colors globally */
+label {
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+    font-weight: 500;
+}
+
+/* Ensure hint text is visible */
+.hint {
+    color: var(--text-muted) !important;
+    font-size: 0.875rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Fix input styling for better visibility */
+input[type="text"],
+input[type="color"],
+textarea,
+select {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Panel backgrounds for better contrast */
+.panel {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+}
+
+.panel-header-main {
+    background: linear-gradient(to bottom, var(--bg-secondary), transparent);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+}
+
+.panel-content {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+}
+
+/* Fix system and node blocks */
+.system-block,
+.node {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.system-block-header,
+.node-title-bar {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Dark mode specific fixes */
+[data-theme="dark"] {
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-tertiary: #374151;
+    --border: #374151;
+    --border-hover: #4b5563;
+}
+
+[data-theme="dark"] .panel {
+    background: var(--bg-primary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .panel-header-main {
+    background: linear-gradient(to bottom, var(--bg-secondary), transparent);
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.1);
+}
+
+[data-theme="dark"] .system-block,
+[data-theme="dark"] .node {
+    background: var(--bg-tertiary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .system-block-header,
+[data-theme="dark"] .node-title-bar {
+    background: var(--bg-secondary);
+}
+
+/* Button visibility fixes */
+.btn {
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn.primary {
+    background: var(--primary) !important;
+    color: white !important;
+    border: none;
+}
+
+.btn.secondary {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border);
+}
+
+.btn.subtle {
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Remove problematic glass effects */
+.app-header,
+.panel,
+.system-block,
+.node {
+    backdrop-filter: none !important;
+}
+
+/* Ensure all icons are visible */
+i.fas,
+i.far {
+    color: currentColor !important;
+}
+
+/* Fix toolbar styling */
+.toolbar {
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+}
+
+[data-theme="dark"] .toolbar {
+    background: var(--bg-secondary);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    #add-system-form {
+        flex-wrap: wrap;
+    }
+
+    #sysNameInput {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* JavaScript hook for dynamic width adjustment */
+.input-auto-width {
+    width: auto !important;
+    min-width: 120px;
+    max-width: 300px;
+}
+
+/* Fix the section title specifically */
+#system-manager h2 {
+    color: var(--text-primary) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Ensure drag handle is visible */
+.system-drag-handle {
+    color: var(--text-muted) !important;
+    cursor: move;
+}
+
+/* Fix collapsed sections */
+.panel.collapsed .panel-content {
+    display: none;
+}
+
+.section-collapse-btn {
+    transition: transform 0.2s ease;
+}
+
+.panel.collapsed .section-collapse-btn i {
+    transform: rotate(-90deg);
+}
+
+/* Ensure proper spacing */
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stack label {
+    font-size: 0.75rem;
+    color: var(--text-muted) !important;
+    margin-bottom: 0.25rem;
+}
+
+/* Fix select dropdown options */
+select option {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] select option {
+    background: var(--bg-tertiary);
+}
+
+/* Ensure form elements are properly sized */
+.toolbar .stack input,
+.toolbar .stack select {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+}
+
+/* Color input specific styling */
+input[type="color"] {
+    -webkit-appearance: none;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}

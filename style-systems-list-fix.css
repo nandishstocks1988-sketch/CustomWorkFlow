@@ -1,0 +1,427 @@
+/* ==========================================================================
+   Systems List Specific Fixes - Addressing all S1-S5 issues
+   ========================================================================== */
+
+/* S1: STRONG FIX - System name field visibility with !important overrides */
+.system-block-header input[type="text"]:first-child,
+.system-block-header input:first-of-type {
+    color: #000000 !important;
+    background: #ffffff !important;
+    border: 2px solid #d1d5db !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    min-width: 150px !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* Dark mode system name input */
+[data-theme="dark"] .system-block-header input[type="text"]:first-child,
+[data-theme="dark"] .system-block-header input:first-of-type {
+    color: #ffffff !important;
+    background: #374151 !important;
+    border-color: #6b7280 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* S2: FIX - Save button label and symbol visibility */
+.system-btn {
+    color: white !important;
+    background: #10b981 !important;
+    border: none !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+}
+
+.system-btn:hover {
+    background: #059669 !important;
+    transform: translateY(-1px);
+}
+
+/* Ensure emoji and text are visible */
+.system-btn::before {
+    content: '';
+    display: none !important;
+}
+
+/* S3: STRONG FIX - Subgroup name text field visibility */
+.system-body input[type="text"],
+input[placeholder="Subgroup name"] {
+    color: #000000 !important;
+    background: #ffffff !important;
+    border: 2px solid #d1d5db !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-theme="dark"] .system-body input[type="text"],
+[data-theme="dark"] input[placeholder="Subgroup name"] {
+    color: #ffffff !important;
+    background: #374151 !important;
+    border-color: #6b7280 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* S4: FIX - Subgroup form layout */
+.system-body>div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 1rem !important;
+    padding: 0.75rem !important;
+    background: var(--bg-secondary) !important;
+    border-radius: 8px !important;
+}
+
+/* Subgroup form inputs proper sizing */
+.system-body input[placeholder="Subgroup name"] {
+    flex: 1 1 200px !important;
+    min-width: 150px !important;
+    max-width: 250px !important;
+}
+
+/* FIX FOR DROPDOWN LENGTH - Make select boxes compact */
+.system-body select,
+.system-block select {
+    flex: 0 0 auto !important;
+    min-width: 80px !important;
+    max-width: 120px !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+    border: 2px solid #d1d5db !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-theme="dark"] .system-body select,
+[data-theme="dark"] .system-block select {
+    color: #ffffff !important;
+    background: #374151 !important;
+    border-color: #6b7280 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Select option visibility fix */
+.system-body select option,
+.system-block select option {
+    color: #000000 !important;
+    background: #ffffff !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-theme="dark"] .system-body select option,
+[data-theme="dark"] .system-block select option {
+    color: #ffffff !important;
+    background: #374151 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Color inputs compact */
+.system-body input[type="color"] {
+    flex: 0 0 auto !important;
+    width: 40px !important;
+    height: 32px !important;
+    padding: 2px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+/* S5 & Issue 1: FIX - Subgroup list display with visible text */
+.subgroup-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 6px !important;
+}
+
+[data-theme="dark"] .subgroup-row {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+/* CRITICAL FIX FOR ISSUE 1: Subgroup list name input visibility - MAXIMUM SPECIFICITY */
+.system-body .subgroup-row input[type="text"],
+.system-body .subgroup-row input:not([type]),
+.system-body .subgroup-row input:first-child,
+#system-list .subgroup-row input[type="text"],
+#system-manager .subgroup-row input[type="text"],
+body .subgroup-row input[type="text"] {
+    flex: 1 1 auto !important;
+    max-width: 200px !important;
+    color: #000000 !important;
+    background: #f3f4f6 !important;
+    background-color: #f3f4f6 !important;
+    border: 2px solid #9ca3af !important;
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-text-fill-color: #000000 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Force text to be black even with any parent styles */
+.subgroup-row input[type="text"]::placeholder {
+    color: #6b7280 !important;
+    -webkit-text-fill-color: #6b7280 !important;
+}
+
+/* Dark mode subgroup name */
+[data-theme="dark"] .system-body .subgroup-row input[type="text"],
+[data-theme="dark"] .system-body .subgroup-row input:not([type]),
+[data-theme="dark"] .system-body .subgroup-row input:first-child,
+[data-theme="dark"] #system-list .subgroup-row input[type="text"],
+[data-theme="dark"] #system-manager .subgroup-row input[type="text"],
+[data-theme="dark"] body .subgroup-row input[type="text"] {
+    color: #ffffff !important;
+    background: #1f2937 !important;
+    background-color: #1f2937 !important;
+    border-color: #6b7280 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Issue 1 FIX: Subgroup list select visibility and size */
+.subgroup-row select {
+    width: auto !important;
+    min-width: 80px !important;
+    max-width: 110px !important;
+    color: #000000 !important;
+    background: #f3f4f6 !important;
+    border: 2px solid #9ca3af !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-theme="dark"] .subgroup-row select {
+    color: #ffffff !important;
+    background: #1f2937 !important;
+    border-color: #6b7280 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+.subgroup-row button {
+    flex: 0 0 auto !important;
+}
+
+/* System block improvements */
+.system-block {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.75rem !important;
+    overflow: visible !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.system-block-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem !important;
+    background: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border) !important;
+    flex-wrap: wrap !important;
+}
+
+.system-body {
+    padding: 0.75rem !important;
+    background: var(--bg-primary) !important;
+}
+
+/* Button consistency throughout systems */
+.system-block button {
+    font-family: inherit !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Delete button specific styling */
+.system-block .delete-btn {
+    background: #ef4444 !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+}
+
+.system-block .delete-btn:hover {
+    background: #dc2626 !important;
+}
+
+/* Add subgroup button styling */
+button.system-btn:has-text("Add Subgroup"),
+button:contains("➕ Add Subgroup") {
+    background: #6366f1 !important;
+    color: white !important;
+}
+
+/* Fix for button text containing emojis */
+.system-btn,
+.delete-btn,
+.small-btn {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+/* Ensure all text is readable */
+.system-block * {
+    color: inherit;
+}
+
+/* System collapse button improvements */
+.system-collapse-btn {
+    position: absolute !important;
+    left: 0.5rem !important;
+    top: 0.5rem !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+    cursor: pointer !important;
+}
+
+/* System drag handle improvements */
+.system-drag-handle {
+    position: absolute !important;
+    left: 2rem !important;
+    top: 0.5rem !important;
+    color: var(--text-secondary) !important;
+    cursor: move !important;
+    padding: 0.25rem !important;
+}
+
+/* Adjust header padding to accommodate absolute elements */
+.system-block-header {
+    padding-left: 4rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .system-block-header {
+        padding-left: 3rem !important;
+    }
+
+    .system-body>div:first-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .system-body input[placeholder="Subgroup name"] {
+        max-width: 100% !important;
+    }
+}
+
+/* High contrast mode for better visibility */
+@media (prefers-contrast: high) {
+
+    .system-block-header input[type="text"],
+    .system-body input[type="text"] {
+        border-width: 2px !important;
+    }
+}
+
+/* Fix collapsed state */
+.system-block.collapsed .system-body {
+    display: none !important;
+}
+
+.system-block.collapsed .system-collapse-btn {
+    transform: rotate(-90deg);
+}
+
+/* Label visibility for system controls */
+.system-block label {
+    display: none !important;
+    /* Hide implicit labels as they're not used */
+}
+
+/* Ensure proper z-index layering */
+.system-block {
+    position: relative;
+    z-index: 1;
+}
+
+.system-block-header {
+    position: relative;
+    z-index: 2;
+}
+
+/* Add visual feedback for interactive elements */
+.system-block input:focus,
+.system-block select:focus {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px !important;
+}
+
+.system-block button:active {
+    transform: scale(0.98);
+}
+
+/* NUCLEAR OPTION - FORCE ALL INPUTS TO BE VISIBLE */
+* input[type="text"] {
+    -webkit-text-fill-color: initial !important;
+}
+
+/* ABSOLUTE HIGHEST SPECIFICITY OVERRIDES */
+html body #system-manager #system-list .system-block .system-body .subgroup-row input[type="text"] {
+    color: #000000 !important;
+    background-color: #f3f4f6 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+html body[data-theme="dark"] #system-manager #system-list .system-block .system-body .subgroup-row input[type="text"] {
+    color: #ffffff !important;
+    background-color: #1f2937 !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Global input fix for WebKit browsers */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #000000 !important;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+}
+
+[data-theme="dark"] input:-webkit-autofill,
+[data-theme="dark"] input:-webkit-autofill:hover,
+[data-theme="dark"] input:-webkit-autofill:focus,
+[data-theme="dark"] input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 30px #374151 inset !important;
+}
+
+/* Remove any filters or effects that might hide text */
+.subgroup-row input[type="text"] {
+    filter: none !important;
+    transform: none !important;
+    mix-blend-mode: normal !important;
+}

@@ -1,0 +1,649 @@
+/* ==========================================================================
+   Comprehensive UI Fixes - Addressing all reported issues
+   ========================================================================== */
+
+/* 1. FIX: System name field - Make entered value visible */
+#sysNameInput {
+    color: var(--text-primary) !important;
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+}
+
+/* Ensure all text inputs have proper contrast */
+input[type="text"],
+input[type="number"],
+textarea {
+    color: var(--text-primary) !important;
+    background: var(--bg-primary) !important;
+}
+
+/* Dark mode text input fixes */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] textarea {
+    color: #ffffff !important;
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+/* 2. FIX: System list display - Make system names visible */
+.system-block-header input[type="text"] {
+    color: var(--text-primary) !important;
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+}
+
+/* Fix subgroup title visibility */
+.subgroup-row input[type="text"] {
+    color: var(--text-primary) !important;
+    background: var(--bg-primary) !important;
+    max-width: 120px !important;
+}
+
+/* 3. FIX: Button labels and symbols visibility */
+.system-btn,
+.delete-btn,
+.add-conn-btn,
+.small-btn {
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+}
+
+.delete-btn {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.delete-btn:hover {
+    background: #dc2626 !important;
+}
+
+/* Ensure button text is always visible */
+button {
+    color: inherit !important;
+}
+
+/* Fix button symbols */
+button:not(.btn) {
+    font-family: inherit !important;
+}
+
+/* 4. FIX: Add node section - PROPER 3-LINE LAYOUT */
+.node {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.5rem !important;
+    overflow: hidden !important;
+}
+
+.node-title-bar {
+    background: var(--bg-secondary) !important;
+    padding: 0.5rem 0.75rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.node-title-bar label {
+    font-size: 0.7rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    min-width: 40px !important;
+}
+
+.node-title-bar input {
+    flex: 1 !important;
+    max-width: 250px !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.813rem !important;
+    height: 28px !important;
+}
+
+/* 3-LINE Layout Structure */
+.node-inner-grid {
+    display: block !important;
+    padding: 0.75rem !important;
+}
+
+/* Make all elements inline-block by default */
+.node-inner-grid>* {
+    display: inline-block !important;
+    vertical-align: bottom !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* LINE 1: Name, Description, Delete button */
+.node-inner-grid>div:nth-child(1) {
+    /* Name */
+    width: 150px !important;
+    margin-right: 0.5rem !important;
+}
+
+.node-inner-grid>div:has(textarea) {
+    /* Description */
+    width: calc(100% - 280px) !important;
+    min-width: 200px !important;
+    margin-right: 0.5rem !important;
+}
+
+.node-inner-grid>.delete-btn:last-of-type {
+    /* Delete button - should be in LINE 1 */
+    margin-right: 0 !important;
+}
+
+/* Force new line after Delete button */
+.node-inner-grid>.delete-btn:last-of-type::after {
+    content: '\A' !important;
+    white-space: pre !important;
+    display: block !important;
+}
+
+/* LINE 2: Shape through Add Connection button */
+.node-inner-grid>div:nth-child(3) {
+    /* Shape */
+    width: 80px !important;
+    margin-right: 0.375rem !important;
+    clear: left !important;
+    /* Start new line */
+}
+
+.node-inner-grid>div:nth-child(7) {
+    /* System */
+    width: 150px !important;
+    margin-right: 0.375rem !important;
+}
+
+.node-inner-grid>div:nth-child(8) {
+    /* Subgroup */
+    width: 150px !important;
+    margin-right: 0.375rem !important;
+}
+
+.node-inner-grid>div:nth-child(6) {
+    /* Text Color */
+    width: 45px !important;
+    margin-right: 0.375rem !important;
+}
+
+.node-inner-grid>div:nth-child(4) {
+    /* Fill Color */
+    width: 45px !important;
+    margin-right: 0.375rem !important;
+}
+
+.node-inner-grid>div:nth-child(5) {
+    /* Border Color (Outline) */
+    width: 45px !important;
+    margin-right: 0.375rem !important;
+}
+
+.node-inner-grid>.add-conn-btn {
+    /* Add Connection button */
+    margin-right: 0 !important;
+}
+
+/* Force new line after Add Connection button */
+.node-inner-grid>.add-conn-btn::after {
+    content: '\A' !important;
+    white-space: pre !important;
+    display: block !important;
+}
+
+/* Each field container styling */
+.node-inner-grid>div {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    gap: 0.125rem !important;
+}
+
+/* Labels */
+.node-inner-grid label {
+    font-size: 0.65rem !important;
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    height: 14px !important;
+    line-height: 14px !important;
+}
+
+/* Inputs */
+.node-inner-grid input[type="text"],
+.node-inner-grid select,
+.node-inner-grid textarea {
+    height: 24px !important;
+    box-sizing: border-box !important;
+}
+
+.node-inner-grid input[type="text"],
+.node-inner-grid select {
+    width: 100% !important;
+    padding: 0.25rem 0.375rem !important;
+    font-size: 0.7rem !important;
+}
+
+.node-inner-grid textarea {
+    width: 100% !important;
+    padding: 0.25rem 0.375rem !important;
+    font-size: 0.7rem !important;
+    min-height: 24px !important;
+    resize: vertical !important;
+    line-height: 1.3 !important;
+}
+
+/* Color inputs */
+.node-inner-grid input[type="color"] {
+    width: 100% !important;
+    height: 24px !important;
+    padding: 1px !important;
+    cursor: pointer !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 3px !important;
+}
+
+/* Buttons */
+.node-inner-grid .add-conn-btn,
+.node-inner-grid .delete-btn {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.7rem !important;
+    height: 24px !important;
+    border-radius: 4px !important;
+    align-self: flex-end !important;
+    line-height: 1 !important;
+}
+
+.add-conn-btn {
+    background: #6366f1 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.add-conn-btn:hover {
+    background: #4f46e5 !important;
+}
+
+/* LINE 3: Connections Container - FORCE NEW LINE AND HORIZONTAL LAYOUT */
+.connections-container {
+    display: block !important;
+    width: 100% !important;
+    background: var(--bg-secondary) !important;
+    padding: 0.5rem !important;
+    border-radius: 4px !important;
+    margin: 0 !important;
+    clear: both !important;
+}
+
+/* Hide empty connections */
+.connections-container:empty {
+    display: none !important;
+}
+
+/* Connection row - FORCE HORIZONTAL DISPLAY */
+.connection-wrapper-adv {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 0.375rem !important;
+    align-items: flex-end !important;
+    padding: 0.375rem !important;
+    background: var(--bg-primary) !important;
+    border-radius: 3px !important;
+    margin-bottom: 0.375rem !important;
+    overflow-x: auto !important;
+}
+
+.connection-wrapper-adv:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Connection fields - FORCE INLINE */
+.conn-field {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    gap: 0.125rem !important;
+    flex-shrink: 0 !important;
+}
+
+/* Fixed widths for connection fields */
+.conn-field:nth-child(1) {
+    /* Target Node */
+    width: 160px !important;
+}
+
+.conn-field:nth-child(2) {
+    /* Connection Label */
+    width: 140px !important;
+}
+
+.conn-field:nth-child(3) {
+    /* Line Style */
+    width: 70px !important;
+}
+
+.conn-field:nth-child(4) {
+    /* Color */
+    width: 35px !important;
+}
+
+.conn-field:nth-child(5) {
+    /* Thickness */
+    width: 35px !important;
+}
+
+.conn-field label {
+    font-size: 0.55rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    height: 11px !important;
+    line-height: 11px !important;
+}
+
+.conn-field select,
+.conn-field input {
+    width: 100% !important;
+    font-size: 0.65rem !important;
+    padding: 0.125rem 0.25rem !important;
+    height: 20px !important;
+}
+
+.conn-field input[type="color"] {
+    width: 100% !important;
+    height: 20px !important;
+    padding: 1px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 2px !important;
+}
+
+/* Arrow checkbox */
+.conn-arrow-toggle {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.125rem !important;
+    width: 35px !important;
+    flex-shrink: 0 !important;
+}
+
+.conn-arrow-toggle label {
+    font-size: 0.45rem !important;
+    height: 11px !important;
+    line-height: 11px !important;
+}
+
+.conn-arrow-toggle input[type="checkbox"] {
+    width: 12px !important;
+    height: 12px !important;
+    margin: 0 !important;
+}
+
+/* Connection delete button */
+.conn-delete-btn {
+    width: 20px !important;
+    height: 20px !important;
+    padding: 0 !important;
+    background: #ef4444 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 3px !important;
+    font-size: 0.55rem !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: flex-end !important;
+    flex-shrink: 0 !important;
+}
+
+/* Override any vertical layouts */
+.connection-wrapper-adv>* {
+    display: inline-flex !important;
+    flex-direction: column !important;
+}
+
+/* Node collapse button */
+.node-collapse-btn {
+    position: absolute !important;
+    left: 0.5rem !important;
+    top: 0.375rem !important;
+    width: 18px !important;
+    height: 18px !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-primary) !important;
+    font-size: 0.875rem !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+}
+
+.node {
+    position: relative !important;
+}
+
+.node-title-bar {
+    padding-left: 2rem !important;
+}
+
+.node.collapsed .node-inner-grid {
+    display: none !important;
+}
+
+.node.collapsed .node-collapse-btn {
+    transform: rotate(-90deg);
+}
+
+/* 5. FIX: Add node button visibility */
+.node .add-conn-btn,
+.node .delete-btn {
+    font-size: 0.7rem !important;
+}
+
+/* 6. FIX: Legend Editor vertical alignment */
+.legend-toolbar {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    margin-bottom: 1rem !important;
+}
+
+.palette {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+}
+
+.legend-controls {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+}
+
+.control-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.control-group label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    min-width: 100px !important;
+}
+
+.control-group label span {
+    min-width: 60px !important;
+}
+
+/* Legend action buttons in a row */
+.legend-controls>button {
+    align-self: flex-start !important;
+}
+
+/* Fix legend editor text visibility */
+.legend-editor {
+    color: var(--text-primary) !important;
+    background: var(--bg-secondary) !important;
+    min-height: 150px !important;
+    padding: 1rem !important;
+}
+
+[data-theme="dark"] .legend-editor {
+    color: #ffffff !important;
+    background: #1f2937 !important;
+}
+
+/* 7. FIX: Mermaid diagram alignment */
+#diagram .mermaid-container svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Ensure mermaid text is visible */
+#diagram text {
+    fill: var(--text-primary) !important;
+}
+
+#diagram .node rect,
+#diagram .node circle,
+#diagram .node ellipse,
+#diagram .node polygon {
+    stroke-width: 2px !important;
+}
+
+/* 8. FIX: Button hover and styling issues */
+/* Remove duplicate tooltips */
+[data-tooltip]::before,
+[data-tooltip]::after {
+    display: none !important;
+}
+
+/* Main action buttons styling */
+.btn {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Primary button styling */
+.btn.primary {
+    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2) !important;
+}
+
+.btn.primary:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Secondary button styling */
+.btn.secondary {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn.secondary:hover {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dark mode button adjustments */
+[data-theme="dark"] .btn.secondary {
+    background: #374151 !important;
+    color: #f3f4f6 !important;
+    border-color: #4b5563 !important;
+}
+
+[data-theme="dark"] .btn.secondary:hover {
+    background: #4b5563 !important;
+    border-color: #6366f1 !important;
+}
+
+/* Floating action button improvements */
+.fab {
+    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4) !important;
+}
+
+.fab:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5) !important;
+}
+
+.fab.secondary {
+    background: var(--bg-primary) !important;
+    color: var(--primary) !important;
+    border: 2px solid var(--primary) !important;
+}
+
+[data-theme="dark"] .fab.secondary {
+    background: #374151 !important;
+    border-color: #818cf8 !important;
+}
+
+/* Fix tooltip positioning to prevent doubles */
+.btn[title],
+.fab[title] {
+    position: relative !important;
+}
+
+/* Additional visibility fixes */
+/* Ensure all labels are visible */
+label {
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    display: block !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* Fix collapsed button visibility */
+.system-collapse-btn,
+.node-collapse-btn {
+    color: var(--text-primary) !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+}
+
+/* System drag handle visibility */
+.system-drag-handle {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+    cursor: move !important;
+}
+
+/* Ensure proper z-index layering */
+.side-panel {
+    z-index: 1000 !important;
+}
+
+.fab {
+    z-index: 900 !important;
+}
+
+[data-tooltip]::after {
+    z-index: 2000 !important;
+}
+
+/* Fix panel headers */
+.panel-header-main h2 {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}

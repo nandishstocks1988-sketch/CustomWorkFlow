@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Node 3-Line Layout Fix
+   ========================================================================== */
+
+/* Node container structure */
+.node-inner-grid {
+    display: block !important;
+    padding: 0.75rem !important;
+}
+
+/* Line containers */
+.node-line {
+    width: 100% !important;
+}
+
+.node-line-1 {
+    display: flex !important;
+    gap: 0.5rem !important;
+    align-items: flex-end !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.node-line-2 {
+    display: flex !important;
+    gap: 0.375rem !important;
+    align-items: flex-end !important;
+    margin-bottom: 0.5rem !important;
+    flex-wrap: nowrap !important;
+}
+
+.node-line-3 {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0.5rem !important;
+}
+
+/* Ensure elements stay in their lines */
+.node-line>div {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    gap: 0.125rem !important;
+    vertical-align: bottom !important;
+}
+
+/* Prevent elements from breaking to new lines */
+.node-line-1>*,
+.node-line-2>* {
+    flex-shrink: 0 !important;
+}
+
+/* Connection container must be block level in line 3 */
+.node-line-3 .connections-container {
+    display: block !important;
+    width: 100% !important;
+    background: var(--bg-secondary) !important;
+    padding: 0.5rem !important;
+    border-radius: 4px !important;
+    margin: 0 !important;
+}
+
+/* Connection rows remain horizontal */
+.connection-wrapper-adv {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.375rem !important;
+    align-items: flex-end !important;
+    padding: 0.375rem !important;
+    background: var(--bg-primary) !important;
+    border-radius: 3px !important;
+    margin-bottom: 0.375rem !important;
+}
+
+/* Override any conflicting styles */
+.node-inner-grid>.connections-container {
+    display: none !important;
+    /* Hide if not in line 3 */
+}
+
+.node-line-3>.connections-container {
+    display: block !important;
+    /* Show when in line 3 */
+}
+
+/* Ensure proper spacing */
+.node-line-1>div:has(textarea) {
+    flex: 1 !important;
+    min-width: 200px !important;
+}
+
+.node-line-1>.delete-btn {
+    margin-left: auto !important;
+    align-self: flex-end !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .node-line-2 {
+        flex-wrap: wrap !important;
+    }
+
+    .node-line-2>div {
+        min-width: 80px !important;
+    }
+}
